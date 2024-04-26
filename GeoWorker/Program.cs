@@ -1,5 +1,6 @@
 using GeoWorker;
 using GeoWorker.Data;
+using GeoWorker.Services;
 using Microsoft.EntityFrameworkCore;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -10,6 +11,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 			options.UseSqlServer(hostContext.Configuration.GetConnectionString("DefaultConnection"));
 		});
 
+		services.AddScoped<QProcessorService>();
 		services.AddHostedService<Worker>();
 	})
 	.Build();
